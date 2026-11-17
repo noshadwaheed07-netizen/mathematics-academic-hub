@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101827">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icon-192.png">
+<title>Mathematics Academic Hub</title>
+<style>
+:root{--bg:#0b1220;--panel:#121d2e;--panel2:#19263a;--text:#edf3fb;--muted:#9aabc1;--line:#2a3a50;--accent:#67d5ad;--accent2:#8ab4ff;--danger:#ff8e8e}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(160deg,#0b1220,#101b2c 55%,#0c1523);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{padding:24px 18px 18px;max-width:1100px;margin:auto}h1{font-size:clamp(25px,5vw,36px);margin:0 0 4px;letter-spacing:-.8px}.sub{color:var(--muted);font-size:13px}
+main{max-width:1100px;margin:auto;padding:0 14px 35px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0 18px}.stat,.panel{background:rgba(18,29,46,.94);border:1px solid var(--line);border-radius:16px;padding:15px}.stat b{font-size:25px;display:block}.stat span{font-size:12px;color:var(--muted)}
+nav{display:flex;gap:7px;overflow:auto;padding:5px 0 14px;position:sticky;top:0;background:rgba(11,18,32,.94);z-index:5}
+nav button,.btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:10px 13px;border-radius:11px;font-weight:650;cursor:pointer;white-space:nowrap}
+nav button.active,.btn.primary{background:var(--accent);color:#082018;border-color:var(--accent)}
+.badge-ok{color:#8ee4bd}.badge-warn{color:#ffd27a}.badge-low{color:#ff9b9b}.timer{font-size:42px;font-weight:750;letter-spacing:1px;text-align:center;margin:10px 0}
+.btn.danger{color:var(--danger)}button:focus,input:focus,select:focus{outline:2px solid var(--accent2);outline-offset:2px}
+.view{display:none}.view.active{display:block}.grid{display:grid;grid-template-columns:1.15fr .85fr;gap:14px}.panel h2{font-size:18px;margin:0 0 12px}.muted{color:var(--muted)}.course{padding:11px 0;border-bottom:1px solid var(--line)}.course:last-child{border:0}.row{display:flex;justify-content:space-between;align-items:center;gap:10px}.small{font-size:12px;color:var(--muted)}
+.progress{height:8px;background:#26364b;border-radius:20px;overflow:hidden;margin-top:8px}.progress i{height:100%;display:block;background:var(--accent);border-radius:20px}
+form{display:grid;gap:9px}label{font-size:12px;color:var(--muted);display:block;margin-bottom:3px}input,select{width:100%;padding:11px;border-radius:10px;border:1px solid var(--line);background:#0d1726;color:var(--text);font:inherit}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:9px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.listitem{border-bottom:1px solid var(--line);padding:11px 0}.listitem:last-child{border:0}.pill{font-size:11px;border:1px solid var(--line);border-radius:20px;padding:3px 8px;color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:13px}td,th{text-align:left;padding:9px 6px;border-bottom:1px solid var(--line)}th{color:var(--muted);font-weight:600}
+.check{display:flex;align-items:center;gap:9px;margin:10px 0}.check input{width:auto;accent-color:var(--accent)}
+.empty{padding:20px;text-align:center;color:var(--muted)}.note{background:#172b32;border:1px solid #285748;color:#b8efda;border-radius:12px;padding:11px;font-size:12px}
+footer{max-width:1100px;margin:10px auto 25px;padding:0 14px;color:var(--muted);font-size:11px}
+@media(max-width:720px){.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.stat{padding:12px}.stat b{font-size:22px}}
+</style>
+
+<style>
+:root{--bg:#080f1d;--panel:#111d30;--panel2:#17263b;--text:#f3f7ff;--muted:#8fa2bc;--line:#263750;--accent:#66e0b4;--accent2:#8ab4ff}
+body{background:#080f1d;font-family:Inter,ui-sans-serif,system-ui,-apple-system,sans-serif;letter-spacing:-.1px}
+.app-header{padding:17px 18px 10px;max-width:760px;margin:auto}
+.brand-row{display:flex;align-items:center;gap:11px}.brand-mark{width:42px;height:42px;border-radius:14px;background:linear-gradient(145deg,#73edc1,#3c9fbd);color:#06251e;display:grid;place-items:center;font-size:27px;font-weight:900;box-shadow:0 7px 22px #48cba533}
+.brand-name{font-weight:900;letter-spacing:1.5px;font-size:15px}.brand-name span{color:var(--accent)}.app-header .sub{font-size:11px;margin-top:1px}.header-avatar{margin-left:auto;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:#203650;color:#a9d7ff;font-weight:800;border:1px solid #36506e}
+main{max-width:760px;padding:0 16px 105px}.welcome-row{display:flex;align-items:center;justify-content:space-between;margin:17px 0 15px}.welcome-row h1{font-size:25px;letter-spacing:-.8px;margin:4px 0}.welcome-row p{font-size:12px;margin:0}.eyebrow,.hero-label{font-size:9px;letter-spacing:1.7px;font-weight:800;color:#8fa7c3}.semester-chip{font-size:10px;font-weight:800;letter-spacing:1px;color:#8de8c8;background:#14352f;border:1px solid #286452;border-radius:20px;padding:8px 11px}
+.hero-card{border:1px solid #2a5d59;border-radius:23px;padding:20px;background:radial-gradient(circle at 90% 10%,#245b5b 0,transparent 37%),linear-gradient(135deg,#153c3a,#122b3c 70%,#17263c);box-shadow:0 14px 35px #0003}
+.hero-top{display:flex;justify-content:space-between;align-items:center}.hero-number{font-size:42px;line-height:1.2;font-weight:850;letter-spacing:-2px;margin:8px 0 0}.hero-caption{font-size:11px;color:#bdd4d5}.hero-orbit{width:72px;height:72px;border-radius:50%;border:1px solid #70d9bb66;display:grid;place-items:center;box-shadow:inset 0 0 22px #69d7b522,0 0 22px #69d7b522}.hero-orbit span{font-size:34px;color:#9af0d3;font-weight:700}.hero-track{height:6px;background:#ffffff20;border-radius:9px;margin:19px 0 12px;overflow:hidden}.hero-track i{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg,#65d9b3,#b3f5d9)}.hero-foot{display:flex;justify-content:space-between;gap:8px;font-size:10px;color:#b7cece}.hero-foot b{color:#e6fff5}
+.section-heading{display:flex;align-items:center;justify-content:space-between;margin:22px 2px 11px}.section-heading h2{font-size:15px;margin:0;letter-spacing:-.3px}.section-heading>span{font-size:10px;color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:0}.stat{background:linear-gradient(145deg,#142238,#101b2c);border:1px solid #253750;border-radius:17px;padding:13px 14px;min-height:95px;position:relative}.stat b{font-size:24px;margin-top:5px}.stat span{font-size:10px;color:#91a5bf}.stat-icon{font-size:15px;color:#77dfbd;background:#1b3b3a;width:27px;height:27px;border-radius:9px;display:grid;place-items:center}
+.quick-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.quick-card{background:#111e31;border:1px solid #263850;border-radius:17px;padding:13px;text-align:left;color:var(--text);display:grid;gap:5px;min-height:105px}.quick-card b{font-size:12px}.quick-card small{font-size:10px;color:var(--muted)}.quick-icon{width:29px;height:29px;border-radius:10px;display:grid;place-items:center;font-size:16px}.mint{background:#173d37;color:#7ce4bd}.blue{background:#1b3454;color:#91bcff}.amber{background:#46371e;color:#f5c66f}.violet{background:#352b53;color:#c0a5ff}
+.panel{background:#111d30;border:1px solid #263750;border-radius:18px;padding:14px}.course-panel{padding:5px 14px}.course{padding:12px 0;border-bottom:1px solid #23344a}.course b{font-size:12px}.course .small{font-size:10px}.progress{height:5px;background:#24364e}.progress i{background:linear-gradient(90deg,#62d8b0,#8abaff)}
+.tasks-panel{margin-top:12px}.tasks-panel .section-heading{margin:0 0 7px}.text-action{border:0;background:none;color:#80dfc0;font-size:10px;font-weight:700;padding:5px}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:20;max-width:760px;margin:auto;display:flex;justify-content:space-around;gap:0;overflow-x:auto;padding:8px 5px calc(8px + env(safe-area-inset-bottom));background:#0d1829f2;border-top:1px solid #2a3a50;backdrop-filter:blur(18px);box-shadow:0 -8px 28px #0004}
+.bottom-nav button{border:0;background:transparent;color:#7187a2;border-radius:12px;padding:4px 7px;min-width:53px;display:flex;flex-direction:column;align-items:center;gap:2px}.bottom-nav button span{font-size:19px;line-height:23px}.bottom-nav button small{font-size:9px;font-weight:650}.bottom-nav button.active{background:#173a36;color:#83e6c1}
+.view{padding-bottom:10px}.view:not(#overview)>.grid{gap:12px}.view:not(#overview) .panel{box-shadow:0 8px 25px #0002}.view:not(#overview) h2{font-size:16px}
+button,input,select{font-family:inherit}button{transition:transform .12s ease,filter .12s ease}button:active{transform:scale(.97)}
+footer{padding-bottom:95px}
+@media(min-width:650px){.stats{grid-template-columns:repeat(4,minmax(0,1fr))}.quick-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.bottom-nav{border:1px solid #2a3a50;border-bottom:0;border-radius:18px 18px 0 0}}
+@media(max-width:390px){.bottom-nav button{min-width:47px;padding:4px 4px}.bottom-nav button small{font-size:8px}.hero-number{font-size:37px}}
+</style>
+</head>
+<body>
+<header class="app-header">
+ <div class="brand-row"><div class="brand-mark">π</div><div><div class="brand-name">MATH<span>HUB</span></div><div class="sub">Sukkur IBA · BS Mathematics</div></div><div class="header-avatar">N</div></div>
+</header>
+<main>
+<section class="stats">
+ <div class="stat"><b id="creditCount">17</b><span>Credit hours</span></div>
+ <div class="stat"><b id="courseCount">7</b><span>Courses</span></div>
+ <div class="stat"><b id="markCount">5</b><span>Assessment records</span></div>
+ <div class="stat"><b id="taskCount">0</b><span>Open tasks</span></div>
+</section>
+<nav class="bottom-nav" aria-label="Main navigation">
+<button class="active" data-tab="overview"><span>⌂</span><small>Home</small></button>
+<button data-tab="marks"><span>▤</span><small>Marks</small></button>
+<button data-tab="deadlines"><span>◷</span><small>Planner</small></button>
+<button data-tab="study"><span>◎</span><small>Study</small></button>
+<button data-tab="attendance"><span>✓</span><small>Attend</small></button>
+<button data-tab="gpa"><span>∑</span><small>GPA</small></button>
+<button data-tab="focus"><span>◉</span><small>Focus</small></button>
+<button data-tab="schedule"><span>▦</span><small>Classes</small></button>
+<button data-tab="backup"><span>⋯</span><small>More</small></button>
+</nav>
+<section id="overview" class="view active">
+ <div class="welcome-row"><div><div class="eyebrow">YOUR SEMESTER · FALL 2026</div><h1>Good evening, Noshad</h1><p class="muted">Small progress every day adds up.</p></div><div class="semester-chip">SEM 01</div></div>
+ <div class="hero-card">
+  <div class="hero-top"><div><div class="hero-label">ACADEMIC OVERVIEW</div><div class="hero-number" id="avg">—</div><div class="hero-caption">Recorded assessment average</div></div><div class="hero-orbit"><span>π</span></div></div>
+  <div class="hero-track"><i id="avgBar" style="width:0%"></i></div>
+  <div class="hero-foot"><span>Based on results entered</span><span>Goal GPA <b id="targetDisplay">3.50 / 4.00</b></span></div>
+ </div>
+ <div class="section-heading"><h2>Your semester</h2><span>Fall 2026</span></div>
+ <div class="stats">
+  <div class="stat"><div class="stat-icon">▦</div><b id="creditCount">17</b><span>Credit hours</span></div>
+  <div class="stat"><div class="stat-icon">∑</div><b id="courseCount">7</b><span>Courses</span></div>
+  <div class="stat"><div class="stat-icon">▤</div><b id="markCount">5</b><span>Results logged</span></div>
+  <div class="stat"><div class="stat-icon">◷</div><b id="taskCount">0</b><span>Open tasks</span></div>
+ </div>
+ <div class="section-heading"><h2>Quick access</h2><span>Manage your work</span></div>
+ <div class="quick-grid">
+  <button class="quick-card" data-jump="marks"><span class="quick-icon mint">▤</span><b>Update marks</b><small>Results & assessments</small></button>
+  <button class="quick-card" data-jump="deadlines"><span class="quick-icon blue">◷</span><b>Plan tasks</b><small>Quizzes & deadlines</small></button>
+  <button class="quick-card" data-jump="attendance"><span class="quick-icon amber">✓</span><b>Attendance</b><small>Track every class</small></button>
+  <button class="quick-card" data-jump="focus"><span class="quick-icon violet">◉</span><b>Focus session</b><small>Start a Pomodoro</small></button>
+ </div>
+ <div class="section-heading"><h2>Course progress</h2><span>7 subjects</span></div>
+ <div class="panel course-panel"><div id="courseSummary"></div></div>
+ <div class="panel tasks-panel"><div class="section-heading"><h2>Coming up</h2><button class="text-action" data-jump="deadlines">View planner →</button></div><div id="nextTasks" class="muted">No deadlines added yet.</div></div>
+ <p class="dashboard-note">Your personal academic space · Keep showing up.</p>
+</section>
+<section id="marks" class="view">
+ <div class="grid">
+  <div class="panel"><h2>Add assessment result</h2><form id="markForm">
+   <div><label>Course</label><select id="mCourse"></select></div>
+   <div class="fields"><div><label>Assessment</label><select id="mType"><option>Midterm</option><option>Sessional</option><option>Final</option><option>Viva</option><option>Quiz</option><option>Assignment</option><option>Other</option></select></div><div><label>Maximum marks</label><input id="mMax" type="number" min="0.01" step="any" value="30" required></div></div>
+   <div><label>Marks obtained</label><input id="mScore" type="number" min="0" step="any" placeholder="e.g. 24" required></div>
+   <button class="btn primary" type="submit">Save result</button>
+  </form></div>
+  <div class="panel"><h2>Assessment records</h2><div id="markList"></div></div>
+ </div>
+</section>
+<section id="deadlines" class="view">
+ <div class="grid">
+  <div class="panel"><h2>Add deadline</h2><form id="taskForm">
+   <div><label>Task title</label><input id="tTitle" placeholder="e.g. QR-I Quiz 2" required></div>
+   <div><label>Course</label><select id="tCourse"></select></div>
+   <div class="fields"><div><label>Type</label><select id="tType"><option>Assignment</option><option>Quiz</option><option>Presentation</option><option>Midterm</option><option>Final</option><option>Project</option><option>Other</option></select></div><div><label>Due date</label><input id="tDate" type="date" required></div></div>
+   <button class="btn primary" type="submit">Add to planner</button>
+  </form></div>
+  <div class="panel"><h2>Your task list</h2><div id="taskList"></div></div>
+ </div>
+</section>
+<section id="study" class="view">
+ <div class="panel"><h2>Daily study checklist</h2><p class="small">Checklist resets for a new calendar day; your past task and mark records remain saved.</p><div id="studyList"></div><div class="progress"><i id="studyBar" style="width:0%"></i></div><p id="studyProgress" class="small"></p></div>
+ <div class="panel" style="margin-top:14px"><h2>Weekly development</h2><div class="course"><b>Saturday · 4:30–5:30 PM</b><div class="small">Chess calculation · English · Mathematical thinking</div></div><div class="course"><b>Sunday · 4:30–5:15 PM</b><div class="small">Weekly academic review and planning</div></div></div>
+</section>
+<section id="gpa" class="view">
+ <div class="grid">
+  <div class="panel"><h2>GPA goal</h2><label>Target GPA (out of 4.00)</label><input id="gpaTarget" type="number" min="0" max="4" step=".01" value="3.50"><p class="small">A target only; it does not calculate your official CGPA.</p></div>
+  <div class="panel"><h2>Course grade points</h2><p class="small">After final results, enter the grade point awarded by IBA for each course. This tracker uses the credit-weighted formula.</p><div id="gradeInputs"></div><div class="row" style="margin-top:12px"><span>Estimated GPA from entered grade points</span><strong id="gpaResult">—</strong></div></div>
+ </div>
+ <p class="note" style="margin-top:14px">No IBA grade conversion scale is built in. Enter official grade points only after confirming them from the university.</p>
+</section>
+<section id="attendance" class="view">
+ <div class="grid">
+  <div class="panel"><h2>Record a class</h2><form id="attendanceForm">
+   <div><label>Course</label><select id="aCourse"></select></div>
+   <div class="fields"><div><label>Date</label><input id="aDate" type="date" required></div><div><label>Status</label><select id="aStatus"><option value="present">Present</option><option value="absent">Absent</option><option value="late">Late</option></select></div></div>
+   <button class="btn primary" type="submit">Save attendance</button>
+  </form><p class="small">Each saved record counts as one class. If a course has multiple periods in one day, record each separately.</p></div>
+  <div class="panel"><h2>Attendance summary</h2><p class="small">Present and late count as attended. The warning threshold is 75% as a planning indicator; confirm your official IBA policy.</p><div id="attendanceSummary"></div></div>
+ </div>
+ <div class="panel" style="margin-top:14px"><h2>Attendance history</h2><div id="attendanceHistory"></div></div>
+</section>
+<section id="focus" class="view">
+ <div class="grid">
+  <div class="panel"><h2>Pomodoro focus session</h2><p class="small">A simple 25-minute focus / 5-minute break cycle. Keep this tab open while the timer runs.</p><div class="timer" id="timerDisplay">25:00</div><div class="actions"><button class="btn primary" id="timerStart">Start</button><button class="btn" id="timerPause">Pause</button><button class="btn" id="timerReset">Reset</button></div><div class="fields" style="margin-top:12px"><div><label>Focus minutes</label><input id="focusMinutes" type="number" min="1" max="180" value="25"></div><div><label>Break minutes</label><input id="breakMinutes" type="number" min="1" max="60" value="5"></div></div><p id="timerMode" class="small">Ready for a focus session.</p></div>
+  <div class="panel"><h2>Focus log</h2><div class="row"><span class="muted">Completed focus sessions</span><strong id="focusCount">0</strong></div><div class="row" style="margin-top:10px"><span class="muted">Total focused minutes</span><strong id="focusTotal">0</strong></div><p class="small">A session is counted when the focus timer reaches zero.</p></div>
+ </div>
+</section>
+<section id="schedule" class="view">
+ <div class="panel"><h2>Weekly class timetable</h2><table><thead><tr><th>Day</th><th>Time</th><th>Class</th></tr></thead><tbody>
+ <tr><td>Monday</td><td>8 AM–12 PM</td><td>Functional English</td></tr><tr><td>Monday</td><td>2–5 PM</td><td>Mathematical Thinking</td></tr>
+ <tr><td>Tuesday</td><td>8 AM–12 PM</td><td>Quantitative Reasoning I</td></tr><tr><td>Tuesday</td><td>2–5 PM</td><td>ICT Lab</td></tr>
+ <tr><td>Wednesday</td><td>8–10:40 AM</td><td>Islamiat</td></tr><tr><td>Thursday</td><td>8 AM–12 PM</td><td>Calculus I</td></tr><tr><td>Friday</td><td>11 AM–1 PM</td><td>ICT Theory</td></tr>
+ </tbody></table><p class="small">Class schedule based on the details you provided. Update it if your university changes a slot.</p></div>
+</section>
+<section id="backup" class="view">
+ <div class="panel"><h2>Data backup & restore</h2><p class="muted">Your data is saved in this browser on this device. Export a backup regularly, especially before clearing browser data or changing phones.</p><div class="actions"><button class="btn primary" id="exportBtn">Export backup (.json)</button><label class="btn" for="importFile" style="cursor:pointer">Import backup</label><input id="importFile" type="file" accept="application/json" style="display:none"></div><p class="small">This is a standalone local app. It does not sync with IBA CMS or Google Calendar.</p></div>
+</section>
+</main>
+<footer>Mathematics Academic Hub · Attendance and focus tracking added · Data stays in this browser unless you export it. Keep a backup file somewhere safe.</footer>
+<script>
+const courses=[
+ {name:"Calculus I",credits:3},{name:"Mathematical Thinking",credits:3},{name:"Quantitative Reasoning I",credits:3},{name:"Functional English",credits:3},{name:"ICT Theory",credits:2},{name:"ICT Lab",credits:1},{name:"Islamiat",credits:2}
+];
+const seedMarks=[
+ {id:1,course:"Islamiat",type:"Midterm",score:30,max:30},
+ {id:2,course:"Mathematical Thinking",type:"Midterm",score:18.6,max:30},
+ {id:3,course:"ICT Theory",type:"Midterm",score:26.25,max:30},
+ {id:4,course:"Quantitative Reasoning I",type:"Midterm",score:21,max:30},
+ {id:5,course:"ICT Lab",type:"Midterm",score:10,max:15}
+];
+const defaults={marks:seedMarks,tasks:[],target:3.5,gradePoints:{},attendance:[],focusSessions:0,focusMinutes:0,study:{date:new Date().toLocaleDateString(),checks:[false,false,false,false]}};
+let data;
+try{data=JSON.parse(localStorage.getItem("mathHubData"))||structuredClone(defaults)}catch(e){data=structuredClone(defaults)}
+function save(){localStorage.setItem("mathHubData",JSON.stringify(data));render()}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function fillSelect(id){document.getElementById(id).innerHTML=courses.map(c=>`<option>${esc(c.name)}</option>`).join("")}
+fillSelect("mCourse");fillSelect("tCourse");fillSelect("aCourse");aDate.value=new Date().toISOString().slice(0,10);
+function openTab(tab){document.querySelectorAll("nav button").forEach(x=>x.classList.toggle("active",x.dataset.tab===tab));document.querySelectorAll(".view").forEach(x=>x.classList.toggle("active",x.id===tab));window.scrollTo({top:0,behavior:"smooth"})}
+document.querySelectorAll("[data-jump]").forEach(b=>b.addEventListener("click",()=>openTab(b.dataset.jump)));
+document.querySelectorAll("nav button").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll("nav button").forEach(x=>x.classList.remove("active"));openTab(b.dataset.tab)}));
+document.getElementById("markForm").addEventListener("submit",e=>{e.preventDefault();let score=Number(mScore.value),max=Number(mMax.value);if(!Number.isFinite(score)||!Number.isFinite(max)||max<=0||score<0||score>max){alert("Score must be between 0 and the maximum.");return}data.marks.push({id:Date.now(),course:mCourse.value,type:mType.value,score,max});e.target.reset();mMax.value=30;save()});
+document.getElementById("taskForm").addEventListener("submit",e=>{e.preventDefault();data.tasks.push({id:Date.now(),title:tTitle.value.trim(),course:tCourse.value,type:tType.value,date:tDate.value,done:false});e.target.reset();save()});
+document.getElementById("attendanceForm").addEventListener("submit",e=>{e.preventDefault();data.attendance=data.attendance||[];data.attendance.push({id:Date.now(),course:aCourse.value,date:aDate.value,status:aStatus.value});save()});
+function deleteAttendance(id){if(confirm("Delete this attendance record?")){data.attendance=(data.attendance||[]).filter(x=>x.id!==id);save()}}
+let timerSeconds=25*60,timerInterval=null,timerKind="focus";
+function updateTimer(){timerDisplay.textContent=String(Math.floor(timerSeconds/60)).padStart(2,"0")+":"+String(timerSeconds%60).padStart(2,"0")}
+function startTimer(){if(timerInterval)return;timerInterval=setInterval(()=>{timerSeconds--;updateTimer();if(timerSeconds<=0){clearInterval(timerInterval);timerInterval=null;if(timerKind==="focus"){data.focusSessions=(data.focusSessions||0)+1;data.focusMinutes=(data.focusMinutes||0)+Number(focusMinutes.value||25);save();timerMode.textContent="Focus complete! Take a short break.";timerKind="break";timerSeconds=Math.max(1,Number(breakMinutes.value)||5)*60;}else{timerMode.textContent="Break complete. Ready for another focus session.";timerKind="focus";timerSeconds=Math.max(1,Number(focusMinutes.value)||25)*60;}updateTimer();}} ,1000)}
+document.getElementById("timerStart").addEventListener("click",startTimer);
+document.getElementById("timerPause").addEventListener("click",()=>{clearInterval(timerInterval);timerInterval=null;timerMode.textContent="Timer paused."});
+document.getElementById("timerReset").addEventListener("click",()=>{clearInterval(timerInterval);timerInterval=null;timerKind="focus";timerSeconds=Math.max(1,Number(focusMinutes.value)||25)*60;updateTimer();timerMode.textContent="Ready for a focus session."});
+function render(){
+ const total=data.marks.reduce((a,m)=>a+m.score,0),max=data.marks.reduce((a,m)=>a+m.max,0),pct=max?100*total/max:0;
+ creditCount.textContent=courses.reduce((a,c)=>a+c.credits,0);courseCount.textContent=courses.length;markCount.textContent=data.marks.length;taskCount.textContent=data.tasks.filter(t=>!t.done).length;
+ avg.textContent=max?pct.toFixed(1)+"%":"—";avgBar.style.width=pct+"%";targetDisplay.textContent=Number(data.target).toFixed(2)+" / 4.00";gpaTarget.value=data.target;
+ courseSummary.innerHTML=courses.map(c=>{let ms=data.marks.filter(m=>m.course===c.name),s=ms.reduce((a,m)=>a+m.score,0),x=ms.reduce((a,m)=>a+m.max,0);return `<div class="course"><div class="row"><b>${esc(c.name)}</b><span class="small">${c.credits} credits</span></div><div class="small">${ms.length?`${s.toFixed(2)} / ${x} recorded · ${(100*s/x).toFixed(1)}%`:"No marks recorded"}</div></div>`}).join("");
+ markList.innerHTML=data.marks.length?data.marks.slice().reverse().map(m=>`<div class="listitem"><div class="row"><b>${esc(m.course)}</b><button class="btn danger" onclick="deleteMark(${m.id})">Delete</button></div><div class="small">${esc(m.type)} · ${m.score}/${m.max} (${(100*m.score/m.max).toFixed(1)}%)</div></div>`).join(""):'<div class="empty">No assessment records yet.</div>';
+ const sorted=data.tasks.slice().sort((a,b)=>a.date.localeCompare(b.date));
+ taskList.innerHTML=sorted.length?sorted.map(t=>`<div class="listitem"><div class="row"><label style="display:flex;gap:8px;align-items:center;color:var(--text)"><input type="checkbox" ${t.done?"checked":""} onchange="toggleTask(${t.id},this.checked)">${esc(t.title)}</label><button class="btn danger" onclick="deleteTask(${t.id})">×</button></div><div class="small">${esc(t.course)} · ${esc(t.type)} · ${esc(t.date)} · ${t.done?"Completed":daysLeft(t.date)}</div></div>`).join(""):'<div class="empty">No deadlines added yet.</div>';
+ const open=sorted.filter(t=>!t.done).slice(0,4);nextTasks.innerHTML=open.length?open.map(t=>`<div class="listitem"><b>${esc(t.title)}</b><div class="small">${esc(t.course)} · ${esc(t.date)} · ${daysLeft(t.date)}</div></div>`).join(""):'No open tasks. Add deadlines in the planner.';
+ if(data.study.date!==new Date().toLocaleDateString())data.study={date:new Date().toLocaleDateString(),checks:[false,false,false,false]};
+ const labels=["Attend classes and record key concepts","Complete focused mathematics practice","Revise today's lecture within 24 hours","Review mistakes and prepare tomorrow's tasks"];
+ studyList.innerHTML=labels.map((x,i)=>`<label class="check"><input type="checkbox" ${data.study.checks[i]?"checked":""} onchange="studyCheck(${i},this.checked)">${x}</label>`).join("");
+ let n=data.study.checks.filter(Boolean).length;studyProgress.textContent=`${n} of 4 activities completed today`;studyBar.style.width=(n/4*100)+"%";
+ gradeInputs.innerHTML=courses.map(c=>`<div class="course"><div class="row"><label>${esc(c.name)} · ${c.credits} credits</label><input aria-label="${esc(c.name)} grade point" style="max-width:100px" type="number" min="0" max="4" step=".01" placeholder="—" value="${data.gradePoints[c.name]??""}" onchange="setGP('${esc(c.name)}',this.value)"></div></div>`).join("");
+ let valid=courses.filter(c=>data.gradePoints[c.name]!==undefined&&data.gradePoints[c.name]!==""&&Number.isFinite(Number(data.gradePoints[c.name]))&&Number(data.gradePoints[c.name])>=0&&Number(data.gradePoints[c.name])<=4);
+ let cr=valid.reduce((a,c)=>a+c.credits,0),pts=valid.reduce((a,c)=>a+c.credits*Number(data.gradePoints[c.name]),0);gpaResult.textContent=cr?(pts/cr).toFixed(2)+" (partial)":"—";
+ data.attendance=data.attendance||[];let records=data.attendance;
+ attendanceSummary.innerHTML=courses.map(c=>{let rs=records.filter(r=>r.course===c.name),att=rs.filter(r=>r.status!=="absent").length,p=rs.length?100*att/rs.length:null,cls=p===null?"":p>=80?"badge-ok":p>=75?"badge-warn":"badge-low";return `<div class="course"><div class="row"><b>${esc(c.name)}</b><strong class="${cls}">${p===null?"—":p.toFixed(1)+"%"}</strong></div><div class="small">${att} attended of ${rs.length} recorded</div><div class="progress"><i style="width:${p||0}%"></i></div></div>`}).join("");
+ attendanceHistory.innerHTML=records.length?records.slice().sort((a,b)=>b.date.localeCompare(a.date)).map(r=>`<div class="listitem"><div class="row"><b>${esc(r.course)}</b><button class="btn danger" onclick="deleteAttendance(${r.id})">Delete</button></div><div class="small">${esc(r.date)} · ${esc(r.status)}</div></div>`).join(""):'<div class="empty">No attendance recorded yet.</div>';
+ focusCount.textContent=data.focusSessions||0;focusTotal.textContent=data.focusMinutes||0;updateTimer();
+}
+function daysLeft(d){let n=Math.ceil((new Date(d+"T00:00:00")-new Date(new Date().toDateString()))/86400000);return n<0?`${-n} day(s) overdue`:n===0?"Due today":`${n} day(s) left`}
+function deleteMark(id){if(confirm("Delete this assessment record?")){data.marks=data.marks.filter(x=>x.id!==id);save()}}
+function deleteTask(id){if(confirm("Delete this task?")){data.tasks=data.tasks.filter(x=>x.id!==id);save()}}
+function toggleTask(id,v){data.tasks=data.tasks.map(t=>t.id===id?{...t,done:v}:t);save()}
+function studyCheck(i,v){data.study.checks[i]=v;save()}
+function setGP(name,v){if(v==="")delete data.gradePoints[name];else if(Number(v)>=0&&Number(v)<=4)data.gradePoints[name]=Number(v);save()}
+gpaTarget.addEventListener("change",()=>{let v=Number(gpaTarget.value);if(v>=0&&v<=4){data.target=v;save()}else alert("Enter a target between 0 and 4.")});
+exportBtn.addEventListener("click",()=>{let blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="Mathematics_Academic_Hub_Backup.json";a.click();URL.revokeObjectURL(url)});
+importFile.addEventListener("change",async e=>{let f=e.target.files[0];if(!f)return;try{let x=JSON.parse(await f.text());if(!Array.isArray(x.marks)||!Array.isArray(x.tasks))throw Error();data={...defaults,...x};save();alert("Backup restored.")}catch(err){alert("That backup file is not valid for this app.")}e.target.value=""});
+render();
+</script>
+<script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(err=>console.warn("Offline setup unavailable",err)));}</script>
+</body></html>
